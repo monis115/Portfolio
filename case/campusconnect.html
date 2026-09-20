@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CampusConnect — Case Study // Monis Raza</title>
+
+<meta name="description" content="CampusConnect — a multi-role admission management platform built solo on Angular 21 and Spring Boot 3.5, deployed to AWS. Architecture, decisions and trade-offs.">
+<meta name="theme-color" content="#04070a">
+<link rel="canonical" href="https://monis115.github.io/Portfolio/case/campusconnect.html">
+
+<meta property="og:type" content="article">
+<meta property="og:title" content="CampusConnect — Case Study">
+<meta property="og:description" content="Nine role-based dashboards, 35+ REST controllers, AWS RDS/S3, PWA delivery. Built solo, end to end.">
+<meta property="og:image" content="https://monis115.github.io/Portfolio/assets/img/og.png">
+
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%2304070a'/%3E%3Ctext x='50' y='70' font-family='monospace' font-size='62' font-weight='700' fill='%232bf5a4' text-anchor='middle'%3E%26gt;_%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/main.css?v=5">
+<link rel="stylesheet" href="../assets/css/case.css?v=1">
+</head>
+
+<body class="case">
+
+<div class="atmos" aria-hidden="true"></div>
+<div class="scan" aria-hidden="true"></div>
+<div class="grain" aria-hidden="true"></div>
+
+<div class="reticle" id="reticle" aria-hidden="true">
+  <i class="hair h"></i><i class="hair v"></i>
+  <span class="ring"></span><span class="dot"></span><span class="xy"></span>
+</div>
+
+<header class="nav stuck">
+  <div class="wrap nav-in">
+    <a class="brand" href="../index.html"><span class="dot"></span>monis<span class="path">@portfolio</span>:~/case$</a>
+    <nav class="nav-links" id="nav-links" style="transform:none">
+      <a href="../index.html#projects">back to arsenal</a>
+      <a href="../index.html#contact">résumé</a>
+      <a href="../index.html#contact">contact</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+  <!-- ░░ header ░░ -->
+  <section class="case-hero">
+    <div class="wrap">
+      <div class="sec-tag"><b>[ case study ]</b> ~/projects/CampusConnect</div>
+      <h1>Campus<em>Connect</em></h1>
+      <p class="lede">
+        A multi-role admission management platform for <b>Rare Education Private Limited</b> —
+        built solo, end to end, between June and December 2025. Angular 21 on the front,
+        Spring Boot 3.5 on the back, running on AWS.
+      </p>
+
+      <div class="case-meta">
+        <div><dt>role</dt><dd>Sole engineer — architecture to deploy</dd></div>
+        <div><dt>duration</dt><dd>Jun 2025 — Dec 2025</dd></div>
+        <div><dt>surface</dt><dd>9 role dashboards · 35+ REST controllers</dd></div>
+        <div><dt>runtime</dt><dd>AWS Elastic Beanstalk · RDS · S3</dd></div>
+      </div>
+
+      <div class="pills case-pills">
+        <span class="pill">Angular 21</span><span class="pill">TypeScript</span><span class="pill">Angular Material</span>
+        <span class="pill">RxJS</span><span class="pill">Chart.js</span><span class="pill">Java 21</span>
+        <span class="pill">Spring Boot 3.5</span><span class="pill">Spring Data JPA</span><span class="pill">MySQL</span>
+        <span class="pill">AWS RDS</span><span class="pill">S3</span><span class="pill">Docker</span><span class="pill">Nginx</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ░░ problem ░░ -->
+  <section class="case-sec">
+    <div class="wrap narrow">
+      <div class="sec-tag"><b>[ 01 ]</b> the problem</div>
+      <h2>Nine people, nine jobs, one application file</h2>
+      <p>
+        An education consultancy moves a student from first enquiry to a visa stamp. Along the way the same
+        application file passes through an <b>admission manager</b>, an <b>agent</b> who sourced the student,
+        an <b>accountant</b> chasing fees, a <b>telex manager</b> handling university correspondence, a
+        <b>university person</b>, a <b>visa manager</b>, a <b>documents person</b>, the <b>student</b>
+        themselves, and an <b>admin</b> over all of it.
+      </p>
+      <p>
+        Every one of them needs a different view of the same record, different permissions, and a different
+        definition of "done". Get that wrong and either people see money they shouldn't, or they spend their
+        day asking someone else to check something for them. The build is nine products sharing one spine.
+      </p>
+    </div>
+  </section>
+
+  <!-- ░░ architecture ░░ -->
+  <section class="case-sec">
+    <div class="wrap">
+      <div class="sec-tag"><b>[ 02 ]</b> the architecture</div>
+      <h2>Click any node — every box was a decision</h2>
+      <p class="sub">Each one has a reason and a cost. Both are below.</p>
+
+      <div class="arch">
+        <div class="arch-map">
+          <svg viewBox="0 0 640 680" role="img" aria-label="CampusConnect architecture diagram" id="arch-svg">
+            <defs>
+              <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+                <path d="M0 0 L10 5 L0 10 z" fill="#2bf5a4" opacity="0.5"/>
+              </marker>
+            </defs>
+
+            <g class="wires" stroke="#2bf5a4" stroke-opacity="0.32" stroke-width="1.4" fill="none" marker-end="url(#ar)">
+              <path d="M320 92 V 132"/>
+              <path d="M320 196 V 236"/>
+              <path d="M320 300 V 340"/>
+              <path d="M320 404 V 444"/>
+              <path d="M320 508 V 548"/>
+              <path d="M180 470 H 128 V 380"/>
+              <path d="M460 470 H 512 V 380"/>
+              <path d="M460 366 H 540"/>
+            </g>
+
+            <g class="node" data-node="angular" tabindex="0">
+              <rect x="150" y="34" width="340" height="58" rx="2"/>
+              <text x="320" y="58">Angular 21 · SSR + Service Worker</text>
+              <text x="320" y="76" class="sm">installable PWA · Material · RxJS</text>
+            </g>
+
+            <g class="node" data-node="nginx" tabindex="0">
+              <rect x="150" y="138" width="340" height="58" rx="2"/>
+              <text x="320" y="162">Nginx</text>
+              <text x="320" y="180" class="sm">HTTPS termination · reverse proxy</text>
+            </g>
+
+            <g class="node" data-node="beanstalk" tabindex="0">
+              <rect x="150" y="242" width="340" height="58" rx="2"/>
+              <text x="320" y="266">AWS Elastic Beanstalk</text>
+              <text x="320" y="284" class="sm">Docker container · Actuator health checks</text>
+            </g>
+
+            <g class="node core" data-node="spring" tabindex="0">
+              <rect x="150" y="346" width="340" height="58" rx="2"/>
+              <text x="320" y="370">Spring Boot 3.5 — 35+ controllers</text>
+              <text x="320" y="388" class="sm">controller → service → repository → model</text>
+            </g>
+
+            <g class="node" data-node="jpa" tabindex="0">
+              <rect x="150" y="450" width="340" height="58" rx="2"/>
+              <text x="320" y="474">Spring Data JPA · Hibernate</text>
+              <text x="320" y="492" class="sm">transactions · scheduled jobs</text>
+            </g>
+
+            <g class="node" data-node="rds" tabindex="0">
+              <rect x="150" y="554" width="340" height="58" rx="2"/>
+              <text x="320" y="578">MySQL — AWS RDS</text>
+              <text x="320" y="596" class="sm">managed backups · single source of truth</text>
+            </g>
+
+            <g class="node side" data-node="s3" tabindex="0">
+              <rect x="24" y="322" width="208" height="58" rx="2"/>
+              <text x="128" y="346">AWS S3</text>
+              <text x="128" y="364" class="sm">passports · offer letters</text>
+            </g>
+
+            <g class="node side" data-node="mail" tabindex="0">
+              <rect x="408" y="322" width="208" height="58" rx="2"/>
+              <text x="512" y="346">Spring Mail</text>
+              <text x="512" y="364" class="sm">status notifications</text>
+            </g>
+
+            <g class="node side" data-node="reports" tabindex="0">
+              <rect x="408" y="430" width="208" height="58" rx="2"/>
+              <text x="512" y="454">iText · Apache POI</text>
+              <text x="512" y="472" class="sm">PDF offers · Excel exports</text>
+            </g>
+          </svg>
+        </div>
+
+        <aside class="arch-panel" id="arch-panel">
+          <div class="term-bar"><span class="tl"><i></i><i></i><i></i></span><span id="arch-path">~/architecture</span></div>
+          <div class="arch-body" id="arch-body"></div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <!-- ░░ api console ░░ -->
+  <section class="case-sec">
+    <div class="wrap">
+      <div class="sec-tag"><b>[ 03 ]</b> the API surface</div>
+      <h2>Thirty-five controllers, <em>four domains</em></h2>
+      <p class="sub">
+        A sample of the shape. Fire one — the responses are representative payloads, replayed locally with
+        realistic latency. No live system is touched and no real student data exists here.
+      </p>
+
+      <div class="api">
+        <div class="api-list" id="api-list"></div>
+        <div class="api-out">
+          <div class="term-bar">
+            <span class="tl"><i></i><i></i><i></i></span>
+            <span id="api-path">select an endpoint</span>
+            <span class="api-status" id="api-status">idle</span>
+          </div>
+          <pre class="api-body" id="api-body">  ▸ pick a request on the left.
+
+  Every endpoint below mirrors one that exists in the real
+  service: same resource naming, same envelope, same role
+  gate. The data is fabricated.</pre>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ░░ hard parts ░░ -->
+  <section class="case-sec">
+    <div class="wrap narrow">
+      <div class="sec-tag"><b>[ 04 ]</b> the parts that were actually hard</div>
+
+      <div class="hard">
+        <article>
+          <h3>Money moves in more than one direction</h3>
+          <p>
+            The accountant's world isn't a payment button. Credit gets extended to agents, collection
+            requests go out, funds get released against milestones, and liabilities sit on a dashboard
+            accruing interest. That accrual runs on a <b>scheduled job</b> rather than being computed
+            at read time — so the number is the same for everyone looking at it, and there's a row
+            explaining how it got there.
+          </p>
+        </article>
+        <article>
+          <h3>Nine roles is an authorisation problem, not a UI problem</h3>
+          <p>
+            The dashboards differ, but the real work is server-side: every controller gates on role, and
+            the front end mirrors it with <b>route guards</b> and an <b>HTTP interceptor</b> that attaches
+            the token and handles the 401 centrally. The UI hides what you can't do; the API refuses it.
+          </p>
+        </article>
+        <article>
+          <h3>Documents are the product</h3>
+          <p>
+            Passports, offer letters, visa paperwork — the platform is a document pipeline wearing a CRM's
+            clothes. Files live in <b>S3</b>, never on the application disk, so the container stays
+            disposable and Beanstalk can replace it without losing anything.
+          </p>
+        </article>
+        <article>
+          <h3>The office has bad internet</h3>
+          <p>
+            Angular <b>Service Worker + SSR</b> wasn't a checkbox. Staff open the platform on phones in
+            places with patchy signal; an installable app that renders on first byte and survives a dropped
+            connection is the difference between the tool being used and being abandoned.
+          </p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ░░ retro ░░ -->
+  <section class="case-sec">
+    <div class="wrap narrow">
+      <div class="sec-tag"><b>[ 05 ]</b> what I'd change</div>
+      <h2>With hindsight</h2>
+      <ul class="retro">
+        <li><b>Events over scheduled polling.</b> Interest accrual and status notifications both run on timers. A small event bus would make the financial history append-only and easier to audit.</li>
+        <li><b>Contract tests.</b> Nine roles against 35+ controllers is a big matrix to verify by hand. Generated API contracts would have caught drift between the Angular models and the DTOs earlier.</li>
+        <li><b>Split the document service.</b> S3, iText and POI all hang off the main app. As a separate service it could scale on its own and stop PDF generation competing with request handling.</li>
+      </ul>
+
+      <div class="cta" style="margin-top:34px">
+        <a class="btn" href="../index.html#projects">[ ← back to the arsenal ]</a>
+        <a class="btn ghost" href="../index.html#contact">[ ./get_in_touch ]</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <div class="wrap foot-in">
+    <span>© <span id="yr"></span> Monis Raza — case study, written by hand.</span>
+    <span class="r">
+      <a href="../index.html">portfolio</a>
+      <a href="https://github.com/monis115" target="_blank" rel="noopener">github</a>
+      <a href="https://www.linkedin.com/in/monis-raza-0552b715a/" target="_blank" rel="noopener">linkedin</a>
+    </span>
+  </div>
+</footer>
+
+<script src="../assets/js/case.js?v=1"></script>
+<script>document.getElementById("yr").textContent = new Date().getFullYear();</script>
+</body>
+</html>

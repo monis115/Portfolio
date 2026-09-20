@@ -1,0 +1,15 @@
+# monis115.github.io/Portfolio
+User-agent: *
+Allow: /
+
+Sitemap: https://monis115.github.io/Portfolio/sitemap.xml
+
+# ───────────────────────────────────────────────────────────────
+#  You read robots.txt. Of course you did.
+#
+#  There are three fragments hidden on this box. This is the first.
+#
+#      fragment 1/3 :: MONIS{c4mpus
+#
+#  Open the shell on the portfolio (press ` ) and run:  man flag
+# ───────────────────────────────────────────────────────────────

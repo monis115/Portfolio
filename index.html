@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Monis Raza — Software Developer // Terminal</title>
+
+<meta name="description" content="Md Monis Raza — Full Stack Developer (Java / Spring Boot &amp; Angular). Backend engineering at Tata Consultancy Services and the solo build of CampusConnect on Angular 21 + Spring Boot 3.5 and AWS. 500+ DSA problems solved. Press ` for the shell.">
+<meta name="author" content="Monis Raza">
+<meta name="theme-color" content="#04070a">
+<link rel="canonical" href="https://monis115.github.io/Portfolio/">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="Monis Raza — Software Developer // Terminal">
+<meta property="og:description" content="Full Stack Developer — Java / Spring Boot &amp; Angular. Enterprise backend at TCS, multi-role platforms on AWS, 35+ shipped builds. A portfolio that runs like a shell.">
+<meta property="og:url" content="https://monis115.github.io/Portfolio/">
+<meta property="og:image" content="https://monis115.github.io/Portfolio/assets/img/og.png">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%2304070a'/%3E%3Ctext x='50' y='70' font-family='monospace' font-size='62' font-weight='700' fill='%232bf5a4' text-anchor='middle'%3E%26gt;_%3C/text%3E%3C/svg%3E">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/main.css?v=6">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Md Monis Raza",
+  "alternateName": "Monis Raza",
+  "jobTitle": "Full Stack Developer",
+  "worksFor": { "@type": "Organization", "name": "Tata Consultancy Services" },
+  "url": "https://monis115.github.io/Portfolio/",
+  "email": "mailto:monisraza2009@gmail.com",
+  "telephone": "+91-9540194616",
+  "alumniOf": { "@type": "CollegeOrUniversity", "name": "Narula Institute of Technology, Kolkata" },
+  "knowsAbout": ["Java", "Spring Boot", "Angular", "TypeScript", "REST APIs", "MySQL", "PostgreSQL", "AWS", "Docker"],
+  "address": { "@type": "PostalAddress", "addressLocality": "New Delhi", "addressCountry": "IN" },
+  "sameAs": [
+    "https://github.com/monis115",
+    "https://www.linkedin.com/in/monis-raza-0552b715a/",
+    "https://www.zorixlab.com/"
+  ]
+}
+</script>
+</head>
+
+<body>
+
+<!-- ░░ boot ░░ -->
+<div id="boot">
+  <div class="boot-box">
+    <div class="boot-log" id="boot-log"></div>
+    <div class="boot-bar" id="boot-bar"><span></span></div>
+    <div class="boot-hint">press any key to skip</div>
+  </div>
+</div>
+
+<!-- ░░ atmosphere ░░ -->
+<canvas id="rain" aria-hidden="true"></canvas>
+<div class="atmos" aria-hidden="true"></div>
+<div class="scan" aria-hidden="true"></div>
+<div class="grain" aria-hidden="true"></div>
+
+<!-- ░░ targeting reticle ░░ -->
+<div class="reticle" id="reticle" aria-hidden="true">
+  <i class="hair h"></i><i class="hair v"></i>
+  <span class="ring"></span><span class="dot"></span>
+  <span class="xy"></span>
+</div>
+
+<!-- ░░ section rail ░░ -->
+<nav class="rail" id="rail" aria-label="section progress">
+  <span class="rail-pct" id="rail-pct">00%</span>
+  <span class="rail-line"><i id="rail-fill"></i></span>
+  <ul id="rail-list"></ul>
+</nav>
+
+<!-- ░░ nav ░░ -->
+<header class="nav">
+  <div class="wrap nav-in">
+    <a class="brand" href="#top">
+      <span class="dot"></span>monis<span class="path">@portfolio</span>:~$
+    </a>
+    <button class="nav-burger" id="burger" aria-label="menu">≡</button>
+    <nav class="nav-links" id="nav-links">
+      <a href="#about">about</a>
+      <a href="#stack">stack</a>
+      <a href="#engine">engine</a>
+      <a href="#projects">projects</a>
+      <a href="#log">log</a>
+      <a href="#contact">contact</a>
+      <button class="term-key" data-shell>▮ shell <kbd>`</kbd></button>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- ░░ hero ░░ -->
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <div class="chips">
+          <span class="chip"><i class="led"></i>status: <b>online</b></span>
+          <span class="chip">loc: <b>New Delhi, IN</b></span>
+          <span class="chip">stack: <b>Java · Spring · Angular</b></span>
+        </div>
+
+        <h1>
+          <span class="glitch" data-text="MONIS">MONIS</span>
+          <span class="l2 glitch" data-text="RAZA">RAZA</span>
+        </h1>
+
+        <p class="hero-role"><span class="prompt">$</span> <span id="role"></span><span class="caret"></span></p>
+
+        <p class="hero-bio">
+          Full-stack developer — <b>Java / Spring Boot on the back, Angular on the front</b>.
+          Two years of <b>enterprise backend engineering</b> at Tata Consultancy Services, and the sole
+          engineer behind <b>CampusConnect</b>: a nine-role admission platform running on Angular 21,
+          Spring Boot 3.5 and AWS. <b>500+ DSA problems solved.</b> 41 public repositories, 25 of them
+          live right now.
+        </p>
+
+        <div class="cta">
+          <a class="btn" href="#projects">[ ./view_projects ]</a>
+          <button class="btn ghost" data-shell>[ ./open_shell ]</button>
+          <a class="btn ghost" href="#contact">[ ./resume — on request ]</a>
+        </div>
+      </div>
+
+      <!-- live system card -->
+      <aside class="term-card">
+        <div class="term-bar">
+          <span class="tl"><i></i><i></i><i></i></span>
+          monis@portfolio — sysinfo
+        </div>
+        <div class="term-body">
+<pre class="term-ascii">   ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
+  █▀                ▀█
+ █▌   ▄▄▄      ▄▄▄   ▐█
+ █▌   ▀▀▀      ▀▀▀   ▐█
+ █▌    ▄▄▄▄▄▄▄▄▄▄    ▐█
+  █▄▄            ▄▄█▀
+    ▀▀██████████▀▀</pre>
+
+          <dl class="neo">
+            <dt>operator</dt><dd>Md Monis Raza</dd>
+            <dt>role</dt><dd>Java Backend Dev — TCS</dd>
+            <dt>focus</dt><dd>Java · Spring Boot · Angular</dd>
+            <dt>studio</dt><dd>Zorix Lab — founder</dd>
+            <dt>dsa</dt><dd>500+ solved · LC 240+ · HR 5★</dd>
+            <dt>repos</dt><dd>41 public · 25 deployed</dd>
+          </dl>
+
+          <div class="telem">
+            <canvas id="spark" width="600" height="90" aria-hidden="true"></canvas>
+            <div class="telem-row">
+              <span>net <b id="t-net">0.0</b> mb/s</span>
+              <span>cpu <b id="t-cpu">0</b>%</span>
+              <span>pkts <b id="t-pkt">0</b></span>
+              <span id="t-clock">--:--:--</span>
+            </div>
+          </div>
+
+          <div class="bars">
+            <div class="bar-row"><span>java/spring</span><span class="bar-track"><i class="bar-fill" data-w="91"></i></span><span>91%</span></div>
+            <div class="bar-row"><span>angular/ts</span><span class="bar-track"><i class="bar-fill" data-w="86"></i></span><span>86%</span></div>
+            <div class="bar-row"><span>data/cloud</span><span class="bar-track"><i class="bar-fill" data-w="79"></i></span><span>79%</span></div>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <!-- ░░ ticker ░░ -->
+  <div class="ticker" aria-hidden="true">
+    <div class="ticker-track">
+      <span><b>//</b> JAVA 21</span><span><b>//</b> SPRING BOOT 3.5</span><span><b>//</b> ANGULAR 21</span><span><b>//</b> TYPESCRIPT</span>
+      <span><b>//</b> SPRING DATA JPA</span><span><b>//</b> RXJS</span><span><b>//</b> MYSQL</span><span><b>//</b> POSTGRESQL</span>
+      <span><b>//</b> AWS</span><span><b>//</b> DOCKER</span><span><b>//</b> REST APIS</span><span><b>//</b> DSA 500+</span>
+      <span><b>//</b> JAVA 21</span><span><b>//</b> SPRING BOOT 3.5</span><span><b>//</b> ANGULAR 21</span><span><b>//</b> TYPESCRIPT</span>
+      <span><b>//</b> SPRING DATA JPA</span><span><b>//</b> RXJS</span><span><b>//</b> MYSQL</span><span><b>//</b> POSTGRESQL</span>
+      <span><b>//</b> AWS</span><span><b>//</b> DOCKER</span><span><b>//</b> REST APIS</span><span><b>//</b> DSA 500+</span>
+    </div>
+  </div>
+
+  <!-- ░░ about ░░ -->
+  <section id="about">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="sec-tag"><b>[ 01 ]</b> cat ~/about.txt</div>
+        <h2 data-scramble>The operator <em>behind the keyboard</em></h2>
+        <p>Full Stack Developer · Java / Spring Boot &amp; Angular · New Delhi</p>
+      </div>
+
+      <div class="stats rise" style="margin-bottom:46px">
+        <div class="stat"><div class="n" data-count="41" data-suffix="">0</div><div class="k">repositories</div></div>
+        <div class="stat"><div class="n" data-count="25" data-suffix="">0</div><div class="k">live deployments</div></div>
+        <div class="stat"><div class="n" data-count="500" data-suffix="+">0</div><div class="k">DSA problems solved</div></div>
+        <div class="stat"><div class="n" data-count="2" data-suffix="+">0</div><div class="k">years at TCS</div></div>
+      </div>
+
+      <div class="about-grid">
+        <figure class="portrait art rise" style="margin:0">
+          <img src="assets/img/operator.svg" alt="Anonymous operator silhouette" width="600" height="680" loading="lazy">
+          <figcaption class="tagline">operator.sig — ident: monis115 · clearance: root</figcaption>
+        </figure>
+
+        <div class="about-body rise">
+          <p>
+            I'm <b>Md Monis Raza</b> — a full-stack developer working in <em>Java, Spring Boot and
+            Angular</em>. Day job: <b>Java Backend Developer at Tata Consultancy Services</b>, building
+            enterprise systems in financial services for the last two years. What that code does belongs
+            to the client, so it stays off this page — but it is the kind of work where being nearly
+            right is the same as being wrong, and that habit follows me everywhere else.
+          </p>
+          <p>
+            What I <em>can</em> show you is the work I own. <b>CampusConnect</b> — a multi-role admission
+            management platform for Rare Education — was a solo build: <em>Angular 21</em> front end,
+            <em>Spring Boot 3.5</em> REST API, nine role-based dashboards, 35+ controllers, MySQL on AWS
+            RDS, S3 document storage, iText PDFs, Apache POI exports, scheduled interest-accrual jobs, and
+            a PWA + SSR delivery containerised onto Elastic Beanstalk behind Nginx.
+          </p>
+          <p>
+            There's a working model of it <a href="#engine">further up this page</a> — pick a role, fire a
+            request, and watch the gate decide. The <a href="case/campusconnect.html">case study</a> pulls
+            the architecture apart node by node.
+          </p>
+          <p>
+            Around it: a hospital billing backend, an education-consultancy platform carrying forty-plus
+            university microsites, restaurant and coffee brands in London, New York and Albuquerque, and
+            <b>500+ DSA problems</b> because problem-solving is the actual job.
+          </p>
+
+          <div class="creds">
+            <h3>// citations</h3>
+            <ul>
+              <li><b>GEM award</b> — top performer, TCS Foundation Training, Trivandrum</li>
+              <li><b>GEM award</b> — project implementation, for consistently high-quality change delivery</li>
+              <li><b>Employee of the Month</b> — delivery quality on a production financial system</li>
+              <li><b>LeetCode 240+</b> · <b>CodeChef 190+</b> · <b>HackerRank 5★</b></li>
+            </ul>
+          </div>
+
+          <div class="idcard">
+            <div class="row"><span>name</span><span>Md Monis Raza</span></div>
+            <div class="row"><span>role</span><span>Java Backend Developer — Tata Consultancy Services</span></div>
+            <div class="row"><span>focus</span><span>Java 21 · Spring Boot 3.5 · Angular 21 · AWS</span></div>
+            <div class="row"><span>studio</span><span><a href="https://www.zorixlab.com/" target="_blank" rel="noopener">Zorix Lab ↗</a></span></div>
+            <div class="row"><span>education</span><span>B.Tech CSE — Narula Institute of Technology, Kolkata · CGPA 8.71</span></div>
+            <div class="row"><span>base</span><span>New Delhi, India</span></div>
+            <div class="row"><span>résumé</span><span><a href="#contact">sent on request</a> — or run <code>cat resume.txt</code> in the shell</span></div>
+            <div class="row"><span>status</span><span><a href="#contact">open to freelance & collaboration</a></span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ░░ stack ░░ -->
+  <section id="stack">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="sec-tag"><b>[ 02 ]</b> ls -la ~/stack</div>
+        <h2 data-scramble>Capability <em>matrix</em></h2>
+        <p>Rated by what has gone to production — enterprise backend code, a nine-role platform on AWS, and the DSA reps behind them.</p>
+      </div>
+      <div class="stack-grid" id="stack-grid"></div>
+    </div>
+  </section>
+
+  <!-- ░░ pipeline engine ░░ -->
+  <section id="engine">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="sec-tag"><b>[ 03 ]</b> ./run admission_pipeline</div>
+        <h2 data-scramble>CampusConnect, <em>playable</em></h2>
+        <p>
+          The platform I built for Rare Education is a role gate standing in front of a workflow. Nine people
+          touch the same application file and every one of them sees a different version of it. Pick a role,
+          pick an action, and watch the API decide — then watch what a single stage transition drags along
+          with it: an offer letter into S3, a ledger entry, a notification, an audit row.
+        </p>
+      </div>
+
+      <div class="engine">
+        <form class="e-panel" onsubmit="return false">
+          <div class="e-row">
+            <label for="e-role">signed in as</label>
+            <select id="e-role">
+              <option>ADMIN</option>
+              <option selected>ADMISSION_MANAGER</option>
+              <option>AGENT</option>
+              <option>ACCOUNTANT</option>
+              <option>VISA_MANAGER</option>
+              <option>DOC_PERSON</option>
+              <option>STUDENT</option>
+            </select>
+          </div>
+          <div class="e-row">
+            <label for="e-stage">file stage</label>
+            <select id="e-stage">
+              <option>ENQUIRY</option>
+              <option>DOCS_PENDING</option>
+              <option selected>UNDER_REVIEW</option>
+              <option>OFFER_ISSUED</option>
+              <option>FEE_PENDING</option>
+              <option>VISA_FILED</option>
+              <option>ENROLLED</option>
+            </select>
+          </div>
+          <div class="e-row">
+            <label for="e-action">action</label>
+            <select id="e-action">
+              <option value="view">view application</option>
+              <option value="advance" selected>advance stage</option>
+              <option value="upload">upload document</option>
+              <option value="collect">raise collection request</option>
+              <option value="release">release funds</option>
+              <option value="visa">schedule visa interview</option>
+              <option value="export">export to Excel</option>
+            </select>
+          </div>
+
+          <div class="e-toggles">
+            <button type="button" class="e-toggle" id="e-docs" data-on="1" data-yes="complete" data-no="missing">
+              documents <span class="e-state"></span>
+            </button>
+            <button type="button" class="e-toggle" id="e-fees" data-on="0" data-yes="cleared" data-no="unpaid">
+              fees <span class="e-state"></span>
+            </button>
+            <button type="button" class="e-toggle" id="e-visa" data-on="0" data-yes="signed off" data-no="pending">
+              visa pack <span class="e-state"></span>
+            </button>
+          </div>
+
+          <p class="e-hint" id="e-hint"></p>
+
+          <div class="e-actions">
+            <button type="button" class="btn" id="e-run">[ ./send_request ]</button>
+            <button type="button" class="btn ghost" id="e-rnd">[ ./randomise ]</button>
+          </div>
+
+          <p class="e-note">
+            The rules are the real ones — role gate, workflow preconditions, side effects. Rewritten
+            standalone for this page; no client data and no live system behind it.
+            <a href="case/campusconnect.html">Full case study →</a>
+          </p>
+        </form>
+
+        <div class="e-console">
+          <div class="term-bar">
+            <span class="tl"><i></i><i></i><i></i></span>
+            campusconnect://api
+            <span class="e-verdict" id="e-verdict">idle</span>
+          </div>
+          <div class="e-out" id="e-out"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ░░ projects ░░ -->
+  <section id="projects">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="sec-tag"><b>[ 04 ]</b> nmap -sV ./projects</div>
+        <h2 data-scramble>The <em>arsenal</em></h2>
+        <p>Every public build, mapped. Click a target for the dossier and a live preview — or run <code>ls</code> in the shell and browse it the fast way.</p>
+      </div>
+
+      <div class="probe">
+        <span class="pr">$ grep -i</span>
+        <input id="q" type="search" placeholder="search the arsenal…" aria-label="Search projects" autocomplete="off" spellcheck="false">
+        <kbd class="slash">/</kbd>
+        <button class="sortbtn" id="sort" data-mode="curated">sort: curated</button>
+        <button class="sortbtn" id="livetog" data-on="0">live only</button>
+        <span class="hits" id="hits"></span>
+      </div>
+
+      <div class="feed" id="feed" hidden></div>
+
+      <div class="filters" id="filters"></div>
+      <div class="grid" id="grid"></div>
+      <div class="grid-more" id="more"><button class="btn ghost">[ load_more ]</button></div>
+    </div>
+  </section>
+
+  <!-- ░░ log ░░ -->
+  <section id="log">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="sec-tag"><b>[ 05 ]</b> git log --author="monis"</div>
+        <h2 data-scramble>Commit <em>history</em></h2>
+      </div>
+      <div class="log" id="log-list"></div>
+    </div>
+  </section>
+
+  <!-- ░░ contact ░░ -->
+  <section id="contact">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="sec-tag"><b>[ 06 ]</b> ./establish_uplink</div>
+        <h2 data-scramble>Open a <em>channel</em></h2>
+        <p>Freelance builds, full-time conversations, or an interesting problem that needs someone stubborn. All of it is welcome.</p>
+      </div>
+
+      <div class="contact-grid">
+        <div class="chan rise">
+          <a href="mailto:monisraza2009@gmail.com">
+            <span class="ic">✉</span>
+            <span><span class="lb">email</span><br>monisraza2009@gmail.com</span>
+            <span class="arw">→</span>
+          </a>
+          <a href="#" data-copy="monisraza2009@gmail.com">
+            <span class="ic">⧉</span>
+            <span><span class="lb">copy address</span><br>one click, straight to clipboard</span>
+            <span class="arw">→</span>
+          </a>
+          <a href="tel:+919540194616">
+            <span class="ic">☎</span>
+            <span><span class="lb">phone</span><br>+91 95401 94616</span>
+            <span class="arw">→</span>
+          </a>
+          <a href="mailto:monisraza2009@gmail.com?subject=R%C3%A9sum%C3%A9%20request">
+            <span class="ic">⎘</span>
+            <span><span class="lb">résumé</span><br>sent on request — just ask</span>
+            <span class="arw">→</span>
+          </a>
+          <a href="https://github.com/monis115" target="_blank" rel="noopener">
+            <span class="ic">⌥</span>
+            <span><span class="lb">github</span><br>@monis115 — 41 repositories</span>
+            <span class="arw">↗</span>
+          </a>
+          <a href="https://www.linkedin.com/in/monis-raza-0552b715a/" target="_blank" rel="noopener">
+            <span class="ic">in</span>
+            <span><span class="lb">linkedin</span><br>Monis Raza</span>
+            <span class="arw">↗</span>
+          </a>
+          <a href="https://www.zorixlab.com/" target="_blank" rel="noopener">
+            <span class="ic">◈</span>
+            <span><span class="lb">studio</span><br>zorixlab.com</span>
+            <span class="arw">↗</span>
+          </a>
+          <a href="https://www.instagram.com/monis___raza___/?hl=en" target="_blank" rel="noopener">
+            <span class="ic">◎</span>
+            <span><span class="lb">instagram</span><br>@monis___raza___</span>
+            <span class="arw">↗</span>
+          </a>
+        </div>
+
+        <form class="form rise" id="contact-form">
+          <div class="field">
+            <label for="f-name">identify yourself</label>
+            <input id="f-name" name="name" placeholder="your name" required>
+          </div>
+          <div class="field">
+            <label for="f-email">return address</label>
+            <input id="f-email" name="email" type="email" placeholder="you@domain.com" required>
+          </div>
+          <div class="field">
+            <label for="f-subject">subject</label>
+            <input id="f-subject" name="subject" placeholder="project / role / idea">
+          </div>
+          <div class="field">
+            <label for="f-message">transmission</label>
+            <textarea id="f-message" name="message" rows="5" placeholder="what are we building?" required></textarea>
+          </div>
+          <button class="btn" type="submit">[ ./transmit ]</button>
+        </form>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- ░░ footer ░░ -->
+<footer class="foot">
+  <div class="wrap foot-in">
+    <span>© <span id="yr"></span> Monis Raza — built from scratch, zero dependencies.</span>
+    <span class="r">
+      <a href="https://github.com/monis115" target="_blank" rel="noopener">github</a>
+      <a href="https://www.linkedin.com/in/monis-raza-0552b715a/" target="_blank" rel="noopener">linkedin</a>
+      <a href="https://www.zorixlab.com/" target="_blank" rel="noopener">zorix lab</a>
+      <a href="#" data-shell>shell</a>
+    </span>
+  </div>
+</footer>
+
+<!-- ░░ project modal ░░ -->
+<div class="modal" id="modal" role="dialog" aria-modal="true" aria-label="Project details">
+  <div class="modal-box">
+    <div class="modal-head">
+      <span class="tl" style="display:flex;gap:6px">
+        <i style="width:9px;height:9px;border-radius:50%;background:#ff5470;display:block"></i>
+        <i style="width:9px;height:9px;border-radius:50%;background:#ffb454;display:block"></i>
+        <i style="width:9px;height:9px;border-radius:50%;background:#2bf5a4;display:block"></i>
+      </span>
+      <span id="modal-path">~/projects</span>
+      <button class="x" id="modal-close" aria-label="close">[ esc ]</button>
+    </div>
+    <div class="modal-body" id="modal-body"></div>
+  </div>
+</div>
+
+<!-- ░░ shell ░░ -->
+<div class="shell" id="shell" role="dialog" aria-modal="true" aria-label="Interactive shell">
+  <div class="shell-box">
+    <div class="term-bar">
+      <span class="tl"><i></i><i></i><i></i></span>
+      monis@portfolio — /bin/portfolio-sh
+      <button class="x" id="shell-close" style="margin-left:auto;color:#7f93a2;padding:0 6px" aria-label="close">[ esc ]</button>
+    </div>
+    <div class="shell-out" id="shell-out"></div>
+    <div class="shell-in">
+      <span class="p">monis@portfolio:~$</span>
+      <input id="shell-input" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="command input">
+    </div>
+    <div class="shell-foot">
+      <span><b>tab</b> complete</span><span><b>↑↓</b> history</span><span><b>help</b> commands</span><span><b>esc</b> close</span>
+    </div>
+  </div>
+</div>
+
+<!-- ░░ keyboard map ░░ -->
+<div class="keys" id="keys" role="dialog" aria-modal="true" aria-label="Keyboard shortcuts">
+  <div class="keys-box">
+    <div class="term-bar"><span class="tl"><i></i><i></i><i></i></span>monis@portfolio — keymap
+      <button class="x" id="keys-close" style="margin-left:auto;color:#7f93a2;padding:0 6px" aria-label="close">[ esc ]</button>
+    </div>
+    <div class="keys-body" id="keys-body"></div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<!--
+  ┌──────────────────────────────────────────────────────────┐
+  │  view-source. respect.                                   │
+  │                                                          │
+  │      fragment 2/3 :: _r0l3                               │
+  │                                                          │
+  │  The third one is not in any file. Ask the admission     │
+  │  pipeline for something no student should ever be able   │
+  │  to ask for, and read what it says back.                 │
+  └──────────────────────────────────────────────────────────┘
+-->
+<script src="assets/js/data.js?v=7"></script>
+<script src="assets/js/app.js?v=7"></script>
+<script src="assets/js/fx.js?v=5"></script>
+<script src="assets/js/engine.js?v=3"></script>
+<script>document.getElementById("yr").textContent = new Date().getFullYear();</script>
+</body>
+</html>
