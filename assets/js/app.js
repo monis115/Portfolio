@@ -299,13 +299,56 @@
   function renderLog() {
     const host = $("#log-list");
     if (!host) return;
-    host.innerHTML = TIMELINE.map((t) => `
-      <article class="log-item rise">
+
+    host.innerHTML = TIMELINE.map((t, i) => `
+      <article class="log-item rise" data-i="${i}" tabindex="0" role="button" aria-label="Show ${esc(t.title)}">
         <div class="log-meta"><span class="hash">commit ${t.hash}</span><span>${esc(t.date)}</span></div>
         <h3>${esc(t.title)}</h3>
         <div class="org">${esc(t.org)}</div>
         <p>${esc(t.body)}</p>
+        <span class="log-more">git show ${t.hash} →</span>
       </article>`).join("");
+
+    const show = (i) => {
+      const t = TIMELINE[i];
+      if (!t) return;
+      $$(".log-item", host).forEach((el) => el.classList.toggle("on", +el.dataset.i === i));
+      $("#show-path").textContent = `git show ${t.hash}`;
+
+      $("#show-body").innerHTML = `
+        <div class="d head">commit ${t.hash}</div>
+        <div class="d dim">Author: Md Monis Raza &lt;${esc(PROFILE.email)}&gt;</div>
+        <div class="d dim">Date:   ${esc(t.date)}</div>
+        <div class="sp"></div>
+        <div class="d ink">    ${esc(t.title)}</div>
+        <div class="d dim">    ${esc(t.org)}</div>
+        <div class="sp"></div>
+        <div class="d hunk">@@ shipped @@</div>
+        ${t.shipped.map((line) => `<div class="d add">+ ${esc(line)}</div>`).join("")}
+        ${t.withheld ? `<div class="d del">- ${esc(t.withheld)}</div>` : ""}
+        <div class="sp"></div>
+        <div class="d hunk">@@ stack @@</div>
+        <div class="show-pills">${t.stack.map((x) => `<span class="pill">${esc(x)}</span>`).join("")}</div>
+        <div class="sp"></div>
+        <div class="show-stats">${t.stats.map(([k, v]) => `<div><span>${esc(k)}</span><b>${esc(v)}</b></div>`).join("")}</div>
+        ${t.link ? `<a class="btn ghost show-link" href="${t.link.href}"${t.link.href.startsWith("http") ? ' target="_blank" rel="noopener"' : ""}>[ ${esc(t.link.label)} → ]</a>` : ""}`;
+    };
+
+    host.addEventListener("click", (e) => {
+      const item = e.target.closest(".log-item");
+      if (item) show(+item.dataset.i);
+    });
+    host.addEventListener("keydown", (e) => {
+      if (e.key !== "Enter" && e.key !== " ") return;
+      const item = e.target.closest(".log-item");
+      if (item) { e.preventDefault(); show(+item.dataset.i); }
+    });
+    host.addEventListener("mouseover", (e) => {
+      const item = e.target.closest(".log-item");
+      if (item && innerWidth > 1000) show(+item.dataset.i);
+    });
+
+    show(0);
   }
 
   /* ============================================================

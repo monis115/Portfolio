@@ -537,34 +537,77 @@ const TIMELINE = [
     date: "Oct 2024 — present",
     title: "Java Backend Developer",
     org: "Tata Consultancy Services",
-    body: "Backend engineering on enterprise systems in financial services — Java, JDBC and PostgreSQL, to production standards where being nearly right is the same as being wrong. Project specifics stay with the client. Recognised with two GEM awards and an Employee of the Month for delivery quality."
+    body: "Backend engineering on enterprise systems in financial services — Java, JDBC and PostgreSQL, to production standards where being nearly right is the same as being wrong. Project specifics stay with the client. Recognised with two GEM awards and an Employee of the Month for delivery quality.",
+    stack: ["Java", "JDBC", "PostgreSQL", "REST"],
+    shipped: [
+      "backend services for production financial systems",
+      "change requests delivered against a live release train",
+      "defect triage on code where money is the output",
+      "two GEM awards + Employee of the Month"
+    ],
+    withheld: "client-confidential — system, product and module names withheld",
+    stats: [["tenure", "2+ yrs"], ["domain", "financial services"], ["citations", "3"]]
   },
   {
     hash: "3e8b204",
-    date: "Jan 2026 — Mar 2026",
-    title: "MedCore — Hospital Billing System",
-    org: "Grace Hospital · freelance",
-    body: "Built the billing backend: REST APIs for patient, doctor and billing management, automated PDF invoicing, H2 in-memory persistence on Spring Data JPA."
-  },
-  {
-    hash: "c14d7a6",
     date: "Jun 2025 — Dec 2025",
     title: "Full-Stack Developer — CampusConnect",
     org: "Rare Education Private Limited · freelance",
-    body: "Sole engineer on a multi-role admission management platform: Angular 21 + Spring Boot 3.5, nine role-based dashboards, 35+ REST controllers, AWS RDS/S3, PDF and Excel pipelines, PWA delivery and a Dockerised deploy to Elastic Beanstalk."
+    body: "Sole engineer on a multi-role admission management platform: Angular 21 + Spring Boot 3.5, nine role-based dashboards, 35+ REST controllers, AWS RDS/S3, PDF and Excel pipelines, PWA delivery and a Dockerised deploy to Elastic Beanstalk.",
+    stack: ["Angular 21", "Spring Boot 3.5", "MySQL", "AWS", "Docker"],
+    shipped: [
+      "nine role-based dashboards behind one workflow engine",
+      "35+ REST controllers across admissions, finance, visas, documents",
+      "S3 document pipeline · iText PDFs · Apache POI exports",
+      "scheduled interest accrual on outstanding liabilities",
+      "PWA + SSR, containerised onto Elastic Beanstalk behind Nginx"
+    ],
+    link: { label: "read the case study", href: "case/campusconnect.html" },
+    stats: [["role", "solo"], ["controllers", "35+"], ["roles served", "9"]]
+  },
+  {
+    hash: "c14d7a6",
+    date: "Jan 2026 — Mar 2026",
+    title: "MedCore — Hospital Billing System",
+    org: "Grace Hospital · freelance",
+    body: "Built the billing backend: REST APIs for patient, doctor and billing management, automated PDF invoicing, H2 in-memory persistence on Spring Data JPA.",
+    stack: ["Java 17", "Spring Boot", "Spring Data JPA", "H2"],
+    shipped: [
+      "patient, doctor and billing resources behind a clean REST surface",
+      "automated PDF invoice generation",
+      "H2 persistence layer via Spring Data JPA"
+    ],
+    stats: [["sector", "healthcare"], ["span", "3 months"], ["output", "invoicing"]]
   },
   {
     hash: "9b02fe5",
     date: "2024 — present",
     title: "Founder / Engineer",
     org: "Zorix Lab",
-    body: "My own studio: client platforms, brand sites and product builds end to end — education consultancies, restaurants and retail across India, the UK, the US and Central Asia."
+    body: "My own studio: client platforms, brand sites and product builds end to end — education consultancies, restaurants and retail across India, the UK, the US and Central Asia.",
+    stack: ["HTML5", "CSS3", "JavaScript", "PHP"],
+    shipped: [
+      "education-consultancy platforms with 40+ university microsites",
+      "restaurant and coffee brands in London, New York and Albuquerque",
+      "a studio site with a four-track hiring funnel",
+      "every build shipped, deployed and still up"
+    ],
+    link: { label: "zorixlab.com", href: "https://www.zorixlab.com/" },
+    stats: [["clients", "4 countries"], ["builds", "20+"], ["role", "everything"]]
   },
   {
     hash: "1d5a880",
     date: "2020 — 2024",
     title: "B.Tech, Computer Science",
     org: "Narula Institute of Technology, Kolkata · CGPA 8.71",
-    body: "Four years of fundamentals alongside a public build log: PHP + MySQL platforms, React applications and a DSA practice habit that now stands at 500+ problems solved — LeetCode 240+, CodeChef 190+, HackerRank 5★."
+    body: "Four years of fundamentals alongside a public build log: PHP + MySQL platforms, React applications and a DSA practice habit that now stands at 500+ problems solved.",
+    stack: ["Java", "PHP", "React", "DSA"],
+    shipped: [
+      "first public commit: 23 January 2022",
+      "PHP + MySQL platforms — carpooling, note-taking, a WordPress plugin",
+      "React rebuilds and a course-length archive kept public, not polished away",
+      "500+ DSA problems — LeetCode 240+ · CodeChef 190+ · HackerRank 5★"
+    ],
+    stats: [["cgpa", "8.71"], ["dsa", "500+"], ["repos started", "30+"]]
   }
 ];

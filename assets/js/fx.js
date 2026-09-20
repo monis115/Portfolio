@@ -354,6 +354,95 @@
   }
 
   /* ============================================================
+     06b. push-activity heatmap — real events, last 90 days
+     ============================================================ */
+  const EV_KEY = "gh:events:monis115";
+
+  async function heatmap() {
+    const host = $("#heat");
+    if (!host) return;
+
+    /* ---- source 1: push events (recent, with commit counts) ---- */
+    let events = [];
+    try {
+      const raw = localStorage.getItem(EV_KEY);
+      const c = raw ? JSON.parse(raw) : null;
+      if (c && Date.now() - c.at < CACHE_TTL) {
+        events = c.events;
+      } else {
+        const r = await fetch("https://api.github.com/users/monis115/events/public?per_page=100");
+        if (r.ok) {
+          const json = await r.json();
+          if (Array.isArray(json)) {
+            events = json
+              .filter((e) => e.type === "PushEvent")
+              .map((e) => ({ day: e.created_at.slice(0, 10), n: e.payload?.size || 1, repo: e.repo?.name || "" }));
+            try { localStorage.setItem(EV_KEY, JSON.stringify({ at: Date.now(), events })); } catch {}
+          }
+        }
+      }
+    } catch { /* offline or rate-limited — the repo dates below still carry it */ }
+
+    /* ---- source 2: every repo's last push (spans the whole year) ---- */
+    let repos = window.__GH;
+    if (!repos) {
+      repos = await new Promise((resolve) => {
+        document.addEventListener("gh:ready", (e) => resolve(e.detail), { once: true });
+        setTimeout(() => resolve(null), 7000);
+      });
+    }
+
+    const byDay = new Map();
+    const repoNames = new Set();
+
+    events.forEach((e) => {
+      byDay.set(e.day, (byDay.get(e.day) || 0) + e.n);
+      if (e.repo) repoNames.add(e.repo);
+    });
+
+    (repos || []).filter((r) => !r.fork).forEach((r) => {
+      const day = r.pushed.slice(0, 10);
+      if (!byDay.has(day)) byDay.set(day, 1);
+      repoNames.add(r.name);
+    });
+
+    if (!byDay.size) return;   // nothing real to draw — stay hidden
+
+    /* ---- draw a year ---- */
+    const WEEKS = 52;
+    const today = new Date();
+    today.setHours(12, 0, 0, 0);
+
+    const start = new Date(today);
+    start.setDate(start.getDate() - (WEEKS * 7 - 1) - today.getDay());
+
+    const cells = [];
+    let total = 0, active = 0;
+
+    for (let w = 0; w < WEEKS; w++) {
+      for (let d = 0; d < 7; d++) {
+        const day = new Date(start);
+        day.setDate(start.getDate() + w * 7 + d);
+        const iso = day.toISOString().slice(0, 10);
+        const n = day > today ? -1 : (byDay.get(iso) || 0);
+        if (n > 0) { total += n; active++; }
+        cells.push({ iso, n });
+      }
+    }
+
+    const level = (n) => (n <= 0 ? 0 : n <= 2 ? 1 : n <= 5 ? 2 : n <= 10 ? 3 : 4);
+
+    $("#heat-grid").innerHTML = cells.map((c) =>
+      c.n < 0
+        ? '<i class="l-none"></i>'
+        : `<i class="l${level(c.n)}" title="${c.iso}${c.n ? ` · ${c.n} commit${c.n === 1 ? "" : "s"}` : ""}"></i>`
+    ).join("");
+
+    $("#heat-sum").textContent = `${total}+ commits · ${repoNames.size} repos · ${active} active days`;
+    host.hidden = false;
+  }
+
+  /* ============================================================
      07. keyboard map overlay
      ============================================================ */
   const KEYS = [
@@ -397,6 +486,7 @@
     telemetry();
     keymap();
     github();
+    heatmap();
 
     // re-apply per-render enhancements when the grid changes
     document.addEventListener("projects:rendered", () => { paintCards(); });

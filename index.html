@@ -22,7 +22,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/main.css?v=6">
+<link rel="stylesheet" href="assets/css/main.css?v=8">
 
 <script type="application/ld+json">
 {
@@ -396,7 +396,33 @@
         <div class="sec-tag"><b>[ 05 ]</b> git log --author="monis"</div>
         <h2 data-scramble>Commit <em>history</em></h2>
       </div>
-      <div class="log" id="log-list"></div>
+      <div class="log-grid">
+        <div class="log" id="log-list"></div>
+
+        <aside class="log-side">
+          <div class="log-show">
+            <div class="term-bar">
+              <span class="tl"><i></i><i></i><i></i></span>
+              <span id="show-path">git show</span>
+            </div>
+            <div class="show-body" id="show-body"></div>
+          </div>
+
+          <div class="heat" id="heat" hidden>
+            <div class="heat-head">
+              <span>push activity · 12 months</span>
+              <span id="heat-sum" class="dim"></span>
+            </div>
+            <div class="heat-grid" id="heat-grid"></div>
+            <div class="heat-foot">
+              <span>less</span>
+              <i class="l0"></i><i class="l1"></i><i class="l2"></i><i class="l3"></i><i class="l4"></i>
+              <span>more</span>
+              <span class="heat-src">live · github events api</span>
+            </div>
+          </div>
+        </aside>
+      </div>
     </div>
   </section>
 
@@ -548,9 +574,9 @@
   │  to ask for, and read what it says back.                 │
   └──────────────────────────────────────────────────────────┘
 -->
-<script src="assets/js/data.js?v=7"></script>
-<script src="assets/js/app.js?v=7"></script>
-<script src="assets/js/fx.js?v=5"></script>
+<script src="assets/js/data.js?v=8"></script>
+<script src="assets/js/app.js?v=8"></script>
+<script src="assets/js/fx.js?v=8"></script>
 <script src="assets/js/engine.js?v=3"></script>
 <script>document.getElementById("yr").textContent = new Date().getFullYear();</script>
 </body>
