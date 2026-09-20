@@ -22,7 +22,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/main.css?v=8">
+<link rel="stylesheet" href="assets/css/main.css?v=9">
 
 <script type="application/ld+json">
 {
@@ -49,14 +49,37 @@
 
 <body>
 
-<!-- ░░ boot ░░ -->
+<!-- ░░ boot gate ░░ -->
 <div id="boot">
   <div class="boot-box">
-    <div class="boot-log" id="boot-log"></div>
-    <div class="boot-bar" id="boot-bar"><span></span></div>
-    <div class="boot-hint">press any key to skip</div>
+    <div class="boot-term">
+      <div class="term-bar">
+        <span class="tl"><i></i><i></i><i></i></span>
+        monis@portfolio — /dev/tty0
+        <span class="boot-badge" id="boot-badge">offline</span>
+      </div>
+
+      <div class="boot-log" id="boot-log"></div>
+
+      <div class="boot-prompt" id="boot-prompt" hidden>
+        <span class="p">guest@portfolio:~$</span>
+        <input id="boot-input" autocomplete="off" autocapitalize="off" autocorrect="off"
+               spellcheck="false" aria-label="Type start to bring the system online" maxlength="60">
+      </div>
+
+      <div class="boot-bar" id="boot-bar"><span></span></div>
+    </div>
+
+    <div class="boot-foot">
+      <span class="boot-hint" id="boot-hint"></span>
+      <button class="boot-start" id="boot-start" hidden>[ start ]</button>
+    </div>
   </div>
 </div>
+
+<noscript>
+  <style>#boot { display: none !important; }</style>
+</noscript>
 
 <!-- ░░ atmosphere ░░ -->
 <canvas id="rain" aria-hidden="true"></canvas>
@@ -575,7 +598,7 @@
   └──────────────────────────────────────────────────────────┘
 -->
 <script src="assets/js/data.js?v=8"></script>
-<script src="assets/js/app.js?v=8"></script>
+<script src="assets/js/app.js?v=9"></script>
 <script src="assets/js/fx.js?v=8"></script>
 <script src="assets/js/engine.js?v=3"></script>
 <script>document.getElementById("yr").textContent = new Date().getFullYear();</script>

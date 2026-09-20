@@ -163,7 +163,7 @@ main { position: relative; z-index: 2; }
 
 section { padding-block: clamp(72px, 10vw, 128px); position: relative; }
 
-/* ---------- 05. boot sequence ---------- */
+/* ---------- 05. the gate ---------- */
 #boot {
   position: fixed; inset: 0;
   z-index: 10000;
@@ -174,25 +174,77 @@ section { padding-block: clamp(72px, 10vw, 128px); position: relative; }
   transition: opacity 0.6s var(--ease), visibility 0.6s;
 }
 
+#boot::before {
+  content: "";
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(700px 500px at 50% 40%, rgba(43, 245, 164, 0.08), transparent 70%),
+    repeating-linear-gradient(to bottom, rgba(255,255,255,0.02) 0 1px, transparent 1px 3px);
+  pointer-events: none;
+}
+
 #boot.done { opacity: 0; visibility: hidden; }
 
-.boot-box { width: min(640px, 100%); }
+.boot-box { width: min(680px, 100%); position: relative; z-index: 2; }
+
+.boot-term {
+  border: 1px solid var(--line-strong);
+  background: rgba(6, 10, 15, 0.94);
+  box-shadow: 0 40px 120px -40px #000, 0 0 90px -55px var(--acc);
+}
+
+.boot-badge {
+  margin-left: auto;
+  padding: 2px 9px;
+  font-size: 9.5px; letter-spacing: 0.2em; text-transform: uppercase;
+  border: 1px solid rgba(255, 84, 112, 0.4);
+  color: var(--acc-4);
+  background: rgba(255, 84, 112, 0.07);
+}
+.boot-badge.booting { color: var(--acc-3); border-color: rgba(255, 180, 84, 0.45); background: rgba(255, 180, 84, 0.07); animation: pulse 1.1s ease-in-out infinite; }
+.boot-badge.online  { color: var(--acc);   border-color: var(--line-strong);        background: rgba(43, 245, 164, 0.1); }
 
 .boot-log {
+  padding: 18px 18px 6px;
   font-size: 12.5px;
   line-height: 1.85;
   color: var(--ink-dim);
-  min-height: 250px;
-  white-space: pre-wrap;
+  min-height: 268px;
+  max-height: 46svh;
+  overflow-y: auto;
 }
 
+.boot-log .bl { white-space: pre-wrap; word-break: break-word; min-height: 1.1em; }
 .boot-log b { color: var(--acc); font-weight: 500; }
 .boot-log i { color: var(--acc-3); font-style: normal; }
+.boot-log .dim { color: var(--ink-faint); }
+.boot-log .ink { color: var(--ink); font-size: 14px; letter-spacing: 0.04em; }
+.boot-log .ok { color: var(--acc); }
+.boot-log .acc { color: var(--acc-2); }
+.boot-log .warn { color: var(--acc-3); }
+.boot-log .echo { color: var(--ink); }
+.boot-log .p { color: var(--acc); }
+
+.boot-prompt {
+  display: flex; align-items: center; gap: 10px;
+  padding: 12px 18px;
+  border-top: 1px solid var(--line);
+  background: rgba(9, 14, 20, 0.9);
+}
+
+.boot-prompt .p { color: var(--acc); font-size: 13px; white-space: nowrap; }
+
+.boot-prompt input {
+  flex: 1; min-width: 0;
+  font: inherit; font-size: 13px;
+  color: var(--ink);
+  background: none; border: 0; outline: none;
+  caret-color: var(--acc);
+}
 
 .boot-bar {
-  margin-top: 18px;
   height: 3px;
-  background: rgba(120, 255, 205, 0.12);
+  background: rgba(120, 255, 205, 0.1);
   overflow: hidden;
 }
 
@@ -203,12 +255,36 @@ section { padding-block: clamp(72px, 10vw, 128px); position: relative; }
   transition: width 0.18s linear;
 }
 
-.boot-hint {
+.boot-foot {
+  display: flex; align-items: center; gap: 14px;
   margin-top: 14px;
-  font-size: 11px;
+  min-height: 34px;
+}
+
+.boot-hint {
+  font-size: 10.5px;
   letter-spacing: 0.22em;
   text-transform: uppercase;
   color: var(--ink-faint);
+}
+.boot-hint b { color: var(--acc); font-weight: 500; }
+
+.boot-start {
+  margin-left: auto;
+  padding: 9px 20px;
+  font-size: 12px;
+  color: var(--acc);
+  border: 1px solid var(--line-strong);
+  background: rgba(43, 245, 164, 0.07);
+  transition: background 0.25s, box-shadow 0.25s;
+}
+.boot-start:hover { background: rgba(43, 245, 164, 0.16); box-shadow: var(--glow-soft); }
+
+@media (max-width: 560px) {
+  .boot-log { min-height: 300px; font-size: 11.5px; padding: 14px 14px 6px; }
+  .boot-prompt { padding: 11px 14px; gap: 7px; }
+  .boot-prompt .p { font-size: 11.5px; }
+  .boot-foot { flex-wrap: wrap; }
 }
 
 /* ---------- 06. nav ---------- */

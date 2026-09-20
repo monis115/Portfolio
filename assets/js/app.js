@@ -17,15 +17,63 @@
   const LANGS = 6;
 
   /* ============================================================
-     01. boot sequence
+     01. the gate — nothing loads until you ask it to
      ============================================================ */
+
+  /* things people actually type at a locked terminal */
+  const REPLIES = [
+    [/^(help|\?|commands?|man)$/,            "There is exactly one command. Five letters. I keep saying it."],
+    [/^(hi|hey|hello|yo|hola|salam|namaste)$/, "Hello. Charming. Now type <b>start</b>."],
+    [/^(jarvis|friday|alexa|siri|cortana)$/,  "Wrong franchise, but I admire the ambition. <b>start</b>."],
+    [/^(who are you|whoami|what are you)$/,   "I'm the front door. Monis Raza is behind it."],
+    [/^sudo/,                                 "You are not in the sudoers file. You are, however, five keystrokes from the portfolio."],
+    [/^rm\s+-rf/,                             "Bold. On a static site. Served read-only from a CDN. Try <b>start</b> instead."],
+    [/^(ls|dir|pwd|cd)/,                      "Nothing is mounted yet. That is precisely what <b>start</b> is for."],
+    [/^(exit|quit|logout|close|:q!?)$/,       "The door only opens inward."],
+    [/^(no|nope|nah|never)$/,                 "Then we wait. My uptime is excellent."],
+    [/^(yes|yeah|yep|ok|okay|sure)$/,         "Wonderful. Now say the actual word."],
+    [/^(why|why\?|what|huh)$/,                "Because a page that opens itself is a brochure. This one asks first."],
+    [/^(please|pls|plz)/,                     "Manners. Genuinely appreciated. Still <b>start</b>."],
+    [/^(password|passwd|login|auth)/,         "There is no password. There is a word. The word is <b>start</b>."],
+    [/^(hack|hacking|pwn|exploit|inject)/,    "That is the entire aesthetic, yes. Door first."],
+    [/^(monis|raza|md monis)/,                "Correct name. Wrong command."],
+    [/^(hire|hire me|job|resume|cv)/,         "That is the spirit — but the pitch lives inside."],
+    [/^(42|the answer)$/,                     "The answer, yes. The command, no."],
+    [/^(coffee|chai|tea)$/,                   "There is a coffee roastery in the projects. Behind the door."],
+    [/^(i love you|love you|<3)$/,            "Noted, logged, and mildly alarming."],
+    [/^(open sesame|abracadabra|alohomora)$/, "Right instinct. Wrong century."],
+    [/^(1337|leet|h4x0r|elite)$/,             "Respect. Still <b>start</b>."],
+    [/^(shutdown|halt|reboot|kill)/,          "It is already off. That is the problem we are solving."],
+    [/^(hello world|print|console\.log)/,     "Every developer's first instinct. Mine too. <b>start</b>."],
+    [/^(fuck|shit|damn|bhak|chutiya)/,        "Understandable. Five letters and it stops."],
+    [/^(begin|run|boot|launch|go|open|init|execute|enter)$/, "Right idea, wrong word. The word is <b>start</b>."]
+  ];
+
+  const SNARK = [
+    "is not a command. It is barely a word.",
+    "did nothing, beautifully.",
+    "— syntax error at character one.",
+    "has been logged. Nobody will ever read it.",
+    "is not it. You can feel that, can't you?",
+    "— command not found. My patience is a static asset; it never runs out.",
+    "is creative. It is not correct.",
+    "— no. The other thing."
+  ];
+
+  const FUZZY = /^(strt|stat|statr|srart|sart|tart|sttart|staart|startt|strart)$/;
+
   function boot() {
     const el = $("#boot");
-    const log = $("#boot-log");
-    const bar = $("#boot-bar span");
     if (!el) return;
 
-    const seen = sessionStorage.getItem("booted");
+    const log   = $("#boot-log"),
+          bar   = $("#boot-bar span"),
+          input = $("#boot-input"),
+          prompt= $("#boot-prompt"),
+          hint  = $("#boot-hint"),
+          badge = $("#boot-badge"),
+          btn   = $("#boot-start");
+
     const finish = () => {
       el.classList.add("done");
       document.body.classList.remove("is-locked");
@@ -34,37 +82,145 @@
       startHero();
     };
 
-    if (seen || REDUCED) { finish(); return; }
+    // already through the door this session
+    if (sessionStorage.getItem("booted")) { finish(); return; }
 
     document.body.classList.add("is-locked");
 
-    const lines = [
-      "<b>[  OK  ]</b> initialising secure shell ...",
-      "<b>[  OK  ]</b> mounting /dev/portfolio",
-      "<b>[  OK  ]</b> loading kernel module: <i>monis.raza</i>",
-      "<b>[  OK  ]</b> establishing uplink → github.com/monis115",
-      `<b>[  OK  ]</b> indexing repositories ... <i>${REPO_COUNT} found</i>`,
-      `<b>[  OK  ]</b> probing deployments ... <i>${LIVE_COUNT} live</i>`,
-      "<b>[  OK  ]</b> decrypting stack manifest",
-      "<b>[  OK  ]</b> injecting phosphor renderer",
-      "<b>[  OK  ]</b> handshake complete",
-      "",
-      "<i>&gt;&gt; ACCESS GRANTED — welcome, operator.</i>"
-    ];
+    let misses = 0;
 
-    let i = 0;
-    const tick = () => {
-      if (i >= lines.length) { setTimeout(finish, 520); return; }
-      log.insertAdjacentHTML("beforeend", lines[i] + "\n");
-      bar.style.width = Math.round(((i + 1) / lines.length) * 100) + "%";
-      i++;
-      setTimeout(tick, i === lines.length ? 260 : 90 + Math.random() * 130);
+    const line = (html, cls = "") =>
+      log.insertAdjacentHTML("beforeend", `<div class="bl ${cls}">${html}</div>`);
+
+    const type = (lines, done) => {
+      let i = 0;
+      const tick = () => {
+        if (i >= lines.length) { done?.(); return; }
+        const [txt, cls] = lines[i++];
+        line(txt, cls);
+        log.scrollTop = log.scrollHeight;
+        setTimeout(tick, REDUCED ? 0 : 130 + Math.random() * 120);
+      };
+      tick();
     };
-    setTimeout(tick, 240);
 
-    const skip = () => finish();
-    el.addEventListener("click", skip, { once: true });
-    window.addEventListener("keydown", skip, { once: true });
+    /* ---------- the greeting ---------- */
+    type([
+      ['<span class="dim">POST ................. ok</span>'],
+      ['<span class="dim">display .............. ok</span>'],
+      ['<span class="dim">interface ............ ok</span>'],
+      ['<span class="warn">session .............. none</span>'],
+      [""],
+      ['<b>SYSTEM IS OFFLINE.</b>', "ink"],
+      ['<span class="dim">This is the portfolio of Md Monis Raza. It does not load itself —</span>'],
+      ['<span class="dim">that would make it a brochure.</span>'],
+      [""],
+      ['Type <b>start</b> and press enter to bring it online.', "acc"]
+    ], () => {
+      prompt.hidden = false;
+      hint.innerHTML = "one command · five letters";
+      input.focus();
+
+      // touch users get the button immediately; everyone else gets it if they stall
+      if (matchMedia("(pointer: coarse)").matches) btn.hidden = false;
+      else setTimeout(() => { if (!misses && !input.value) btn.hidden = false; }, 15000);
+    });
+
+    /* ---------- the boot proper ---------- */
+    const ignite = () => {
+      input.disabled = true;
+      prompt.hidden = true;
+      btn.hidden = true;
+      hint.textContent = "";
+      badge.textContent = "booting";
+      badge.className = "boot-badge booting";
+
+      const seq = [
+        '<b>[  OK  ]</b> waking kernel module: <i>monis.raza</i>',
+        '<b>[  OK  ]</b> mounting /dev/portfolio',
+        '<b>[  OK  ]</b> establishing uplink → github.com/monis115',
+        `<b>[  OK  ]</b> indexing repositories ... <i>${REPO_COUNT} found</i>`,
+        `<b>[  OK  ]</b> probing deployments ... <i>${LIVE_COUNT} live</i>`,
+        '<b>[  OK  ]</b> loading admission pipeline',
+        '<b>[  OK  ]</b> injecting phosphor renderer',
+        '<b>[  OK  ]</b> handshake complete',
+        "",
+        '<i>&gt;&gt; ACCESS GRANTED — welcome, operator.</i>'
+      ];
+
+      let i = 0;
+      const tick = () => {
+        if (i >= seq.length) {
+          badge.textContent = "online";
+          badge.className = "boot-badge online";
+          setTimeout(finish, 480);
+          return;
+        }
+        line(seq[i]);
+        log.scrollTop = log.scrollHeight;
+        bar.style.width = Math.round(((i + 1) / seq.length) * 100) + "%";
+        i++;
+        setTimeout(tick, REDUCED ? 0 : (i === seq.length ? 320 : 85 + Math.random() * 120));
+      };
+
+      line("");
+      tick();
+    };
+
+    /* ---------- everything that is not 'start' ---------- */
+
+    const answer = (raw) => {
+      const v = raw.trim().toLowerCase();
+      line(`<span class="p">guest@portfolio:~$</span> ${esc(raw)}`, "echo");
+
+      if (!v) { line('<span class="dim">Type something. Ideally <b>start</b>.</span>'); return; }
+
+      if (v === "start") {
+        line('<span class="ok">acknowledged.</span>');
+        setTimeout(ignite, REDUCED ? 0 : 420);
+        return;
+      }
+
+      if (FUZZY.test(v)) {
+        line('<span class="ok">close enough. Bringing it up.</span>');
+        setTimeout(ignite, REDUCED ? 0 : 420);
+        return;
+      }
+
+      misses++;
+
+      const hit = REPLIES.find(([re]) => re.test(v));
+      if (hit) line(`<span class="warn">${hit[1]}</span>`);
+      else line(`<span class="warn">“${esc(raw.slice(0, 28))}” ${SNARK[(Math.random() * SNARK.length) | 0]}</span>`);
+
+      // escalating mercy
+      if (misses === 3) {
+        line('<span class="dim">hint: s · t · a · r · t</span>');
+        btn.hidden = false;
+      }
+      if (misses === 6) line('<span class="dim">I can do this all day. I am a loop.</span>');
+      if (misses >= 9) {
+        line('<span class="acc">Fine. You have earned it the hard way.</span>');
+        setTimeout(ignite, 700);
+      }
+
+      log.scrollTop = log.scrollHeight;
+    };
+
+    input.addEventListener("keydown", (e) => {
+      if (e.key !== "Enter") return;
+      const v = input.value;
+      input.value = "";
+      answer(v);
+    });
+
+    btn.onclick = () => { input.value = ""; line('<span class="p">guest@portfolio:~$</span> start', "echo"); line('<span class="ok">acknowledged.</span>'); setTimeout(ignite, 300); };
+
+    // the caret should never lose focus while the gate is up
+    el.addEventListener("mousedown", (e) => {
+      if (e.target !== btn && !input.disabled) { e.preventDefault(); input.focus(); }
+    });
+    addEventListener("keydown", () => { if (!input.disabled && !prompt.hidden) input.focus(); });
   }
 
   /* ============================================================
